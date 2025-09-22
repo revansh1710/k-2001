@@ -410,6 +410,41 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPlanetPlanet extends Struct.CollectionTypeSchema {
+  collectionName: 'planets';
+  info: {
+    displayName: 'planet';
+    pluralName: 'planets';
+    singularName: 'planet';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    density_kg_m3: Schema.Attribute.Decimal;
+    description: Schema.Attribute.Text;
+    gravity_m_s2: Schema.Attribute.Decimal;
+    images: Schema.Attribute.Media<undefined, true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::planet.planet'
+    > &
+      Schema.Attribute.Private;
+    mass_kg: Schema.Attribute.BigInteger;
+    name: Schema.Attribute.String;
+    orbit_radius_km: Schema.Attribute.BigInteger;
+    publishedAt: Schema.Attribute.DateTime;
+    radius_km: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -920,6 +955,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::planet.planet': ApiPlanetPlanet;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

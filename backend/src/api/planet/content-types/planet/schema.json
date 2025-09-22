@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "planets",
+  "info": {
+    "singularName": "planet",
+    "pluralName": "planets",
+    "displayName": "planet"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "radius_km": {
+      "type": "integer"
+    },
+    "orbit_radius_km": {
+      "type": "biginteger"
+    },
+    "mass_kg": {
+      "type": "biginteger"
+    },
+    "gravity_m_s2": {
+      "type": "decimal"
+    },
+    "density_kg_m3": {
+      "type": "decimal"
+    },
+    "description": {
+      "type": "text"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false
+    }
+  }
+}
