@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "apods",
+  "info": {
+    "singularName": "apod",
+    "pluralName": "apods",
+    "displayName": "APOD",
+    "description": "NASA Astronomy Picture of the Day"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "date": {
+      "type": "date",
+      "required": true,
+      "unique": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "explanation": {
+      "type": "text"
+    },
+    "media_type": {
+      "type": "enumeration",
+      "enum": ["image", "video"],
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "hdurl": {
+      "type": "string"
+    }
+  }
+}

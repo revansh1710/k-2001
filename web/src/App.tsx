@@ -1,10 +1,23 @@
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/HomePage";     // new homepage
+import PlanetList from "./components/PlanetList"; // dashboard
 
-const App = () => {
+const App: React.FC = () => {
   return (
-    <div>
-      <h1>calendar</h1>
-    </div>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        {/* Homepage */}
+        <Route path="/" element={<Home />} />
 
-export default App
+
+        {/* Dashboard (protected later with auth) */}
+        <Route path="/dashboard" element={<PlanetList />} />
+
+        {/* Optional: add <Route path="/login" ...> and <Route path="/register" ...> */}
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;

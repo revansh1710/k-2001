@@ -410,6 +410,70 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiApodApod extends Struct.CollectionTypeSchema {
+  collectionName: 'apods';
+  info: {
+    description: 'NASA Astronomy Picture of the Day';
+    displayName: 'APOD';
+    pluralName: 'apods';
+    singularName: 'apod';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    explanation: Schema.Attribute.Text;
+    hdurl: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::apod.apod'> &
+      Schema.Attribute.Private;
+    media_type: Schema.Attribute.Enumeration<['image', 'video']> &
+      Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ApiContactContact extends Struct.CollectionTypeSchema {
+  collectionName: 'contacts';
+  info: {
+    displayName: 'Contact';
+    pluralName: 'contacts';
+    singularName: 'contact';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact.contact'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.Text;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPlanetPlanet extends Struct.CollectionTypeSchema {
   collectionName: 'planets';
   info: {
@@ -434,7 +498,7 @@ export interface ApiPlanetPlanet extends Struct.CollectionTypeSchema {
       'api::planet.planet'
     > &
       Schema.Attribute.Private;
-    mass_kg: Schema.Attribute.BigInteger;
+    mass_kg: Schema.Attribute.String;
     name: Schema.Attribute.String;
     orbit_radius_km: Schema.Attribute.BigInteger;
     publishedAt: Schema.Attribute.DateTime;
@@ -955,6 +1019,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::apod.apod': ApiApodApod;
+      'api::contact.contact': ApiContactContact;
       'api::planet.planet': ApiPlanetPlanet;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

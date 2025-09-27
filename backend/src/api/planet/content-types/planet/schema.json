@@ -21,7 +21,7 @@
       "type": "biginteger"
     },
     "mass_kg": {
-      "type": "biginteger"
+      "type": "string"
     },
     "gravity_m_s2": {
       "type": "decimal"
