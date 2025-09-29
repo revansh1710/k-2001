@@ -28,7 +28,7 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:1337/api/user/register",
+        import.meta.env.VITE_REGISTER_URL,
         formData,
         { withCredentials: true }
       );

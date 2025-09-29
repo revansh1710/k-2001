@@ -173,7 +173,7 @@ const OrbitViz: React.FC<{ planets: StrapiPlanet[]; t: number; size?: number }> 
 /* -------------------------------- component -------------------------------- */
 
 const PlanetList: React.FC = () => {
-    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:1337/api/planets";
+    const apiUrl = import.meta.env.VITE_PLANET_URL;
     const navigate = useNavigate();
 
     // --- core state ---

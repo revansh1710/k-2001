@@ -13,9 +13,8 @@ export interface Apod {
 }
 
 type ApodLiveResponse = Apod;
-
-const LIVE_API = "http://localhost:1337/api/apod/live";
-const REFRESH_API = "http://localhost:1337/api/apod/refresh";
+const LIVE_API = import.meta.env.VITE_LIVE_URL 
+const REFRESH_API = import.meta.env.VITE_REFRESH_URL
 
 export const useStrapiApod = () => {
   const [apod, setApod] = useState<Apod | null>(null);
