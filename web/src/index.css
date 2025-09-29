@@ -1,1 +1,59 @@
 @import "tailwindcss";
+/* Cosmic gradient + moving stars */
+:root { --stars-url: url('https://assets.codepen.io/1468070/stars.png'); }
+
+html, body, #root { height: 100%; }
+
+body {
+  background: radial-gradient(1200px 700px at 50% 0%, #0d1327 0%, #050815 50%, #02040a 100%);
+  color: #e6eef8;
+}
+
+/* star layer */
+.cosmo-stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--stars-url);
+  opacity: .18;
+  animation: cosmo-drift 120s linear infinite;
+  z-index: 0;
+}
+
+@keyframes cosmo-drift {
+  from { background-position: 0 0; }
+  to   { background-position: -3000px 1500px; }
+}
+
+/* reusable glass card */
+.cosmo-card {
+  @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-xl shadow-md;
+}
+
+/* Kendo TabStrip minimal overrides */
+.k-tabstrip-items { display: flex; gap: .25rem; background: transparent !important; }
+.k-tabstrip-items .k-item { color: #c9d7ee; }
+.k-tabstrip-items .k-item.k-state-active {
+  color: #e6eef8;
+  box-shadow: inset 0 -2px 0 0 #38bdf8;
+}
+
+/* Glassy Kendo Grid */
+.cosmo-grid .k-grid-header,
+.cosmo-grid .k-grid-aria-root,
+.cosmo-grid .k-grid-content {
+  background: rgba(255,255,255,0.04);
+}
+.cosmo-grid .k-grid-table tr:hover td {
+  background: rgba(255,255,255,0.06);
+}
+.cosmo-grid .k-grid-header {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.cosmo-grid .k-table-th {
+  color: #cfe1ff;
+}
+.cosmo-grid .k-pager {
+  background: transparent;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}

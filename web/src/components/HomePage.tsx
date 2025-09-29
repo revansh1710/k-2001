@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import backgroundVideo from "../assets/background.mp4";
 import about from '../assets/about.jpg';
 import Swal from "sweetalert2";
+import { FaLinkedinIn, FaInstagram } from "react-icons/fa6";
+import { FaSignInAlt, FaUserPlus } from "react-icons/fa";
 const Home: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -81,16 +83,20 @@ const Home: React.FC = () => {
                     <div className="hidden md:flex gap-3">
                         <Link
                             to="/login"
-                            className="px-3 py-1.5 rounded-lg border border-white/30 text-gray-200 hover:bg-white/10 transition"
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/30 text-gray-200 hover:bg-white/10 transition"
                         >
+                            <FaSignInAlt className="text-sm" />
                             Login
                         </Link>
+
                         <Link
                             to="/register"
-                            className="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold transition"
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold transition"
                         >
+                            <FaUserPlus className="text-sm" />
                             Register
                         </Link>
+
                     </div>
 
                     {/* Mobile hamburger */}
@@ -163,12 +169,12 @@ const Home: React.FC = () => {
                         Explore the cosmos, powered by Strapi, React, NASA APOD, and ISRO missions.
                     </p>
                     <div className="mt-8 flex gap-4 justify-center">
-                        <Link
-                            to="/dashboard"
+                        <a
+                            href="/dashboard"
                             className="px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-700 font-semibold shadow-lg transition"
                         >
                             Enter Dashboard 🚀
-                        </Link>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -269,13 +275,24 @@ const Home: React.FC = () => {
             {/* Footer */}
             <footer className="py-6 px-6 bg-black border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 items-center text-sm text-gray-400 gap-y-4">
                 {/* Left: auth links */}
-                <div className="flex gap-4 justify-center sm:justify-start">
-                    <Link to="/login" className="hover:text-sky-400">
-                        Login
-                    </Link>
-                    <Link to="/register" className="hover:text-sky-400">
-                        Register
-                    </Link>
+                <div className="flex gap-4 justify-center sm:justify-start text-xl">
+                    <a
+                        href="https://www.linkedin.com/in/kaushik-patil-03903a243/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-sky-400 transition-colors"
+                    >
+                        <FaLinkedinIn />
+                    </a>
+
+                    <a
+                        href="https://www.instagram.com/kaushik.json/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-pink-400 transition-colors"
+                    >
+                        <FaInstagram />
+                    </a>
                 </div>
 
                 {/* Center: credits */}
