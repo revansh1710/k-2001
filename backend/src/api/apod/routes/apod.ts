@@ -1,20 +1,17 @@
+// src/api/apod/routes/custom-apod.ts
 export default {
   routes: [
     {
-      method: "GET",
-      path: "/apod",
-      handler: "apod.latest",
-      config: {
-        auth: false, // make public
-      },
+      method: 'GET',
+      path: '/apod/live',
+      handler: 'apod.live',
+      config: { auth: false }, // set to true if you want auth
     },
     {
-      method: "POST",
-      path: "/apod/refresh",
-      handler: "apod.refresh",
-      config: {
-        auth: false, // you might lock this down later
-      },
+      method: 'GET',
+      path: '/apod/refresh',
+      handler: 'apod.refresh',
+      config: { auth: false }, // set to true if you want auth
     },
   ],
 };

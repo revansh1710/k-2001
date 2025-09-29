@@ -1,43 +1,45 @@
-import axios from "axios";
+// src/api/apod/services/apod.ts
+import { factories } from '@strapi/strapi';
 
-export default {
+interface NasaApod {
+  title: string;
+  date: string;
+  explanation: string;
+  media_type: 'image' | 'video';
+  url: string;
+  hdurl?: string;
+  thumbnail_url?: string;
+}
+
+export default factories.createCoreService('api::apod.apod', ({ strapi }) => ({
+
   async fetchAndStore() {
-    const apiKey = process.env.NASA_API_KEY || "DEMO_KEY";
-    const endpoint = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+    const key = process.env.NASA_API_KEY;
+    if (!key) throw new Error('NASA_API_KEY not configured');
 
-    const { data } = await axios.get(endpoint);
-
-    // upsert by date
-    const existing = await strapi.db.query("api::apod.apod").findOne({
-      where: { date: data.date },
+    const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${key}&thumbs=true`, {
+      headers: { Accept: 'application/json' },
     });
+    if (!res.ok) throw new Error(await res.text());
+    const a = (await res.json()) as NasaApod;
 
-    if (existing) {
-      // update if needed
-      await strapi.db.query("api::apod.apod").update({
-        where: { id: existing.id },
-        data: {
-          title: data.title,
-          explanation: data.explanation,
-          media_type: data.media_type,
-          url: data.url,
-          hdurl: data.hdurl,
-        },
-      });
-      return existing;
+    const data = {
+      date: a.date,
+      title: a.title,
+      explanation: a.explanation,
+      media_type: a.media_type,
+      url: a.url,
+      hdurl: a.hdurl ?? null,
+    };
+
+    // For a collection-type "apod": upsert first row
+    const existing = await strapi.entityService.findMany('api::apod.apod', { limit: 1 });
+    if (existing?.[0]) {
+      return await strapi.entityService.update('api::apod.apod', existing[0].id, { data });
     }
+    return await strapi.entityService.create('api::apod.apod', { data });
 
-    const created = await strapi.db.query("api::apod.apod").create({
-      data: {
-        date: data.date,
-        title: data.title,
-        explanation: data.explanation,
-        media_type: data.media_type,
-        url: data.url,
-        hdurl: data.hdurl,
-      },
-    });
-
-    return created;
+    // If you made APOD a single-type, replace the above with the single-type update.
   },
-};
+
+}));
