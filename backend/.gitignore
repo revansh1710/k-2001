@@ -19,6 +19,10 @@ dist/
 tmp/
 *.tmp
 
+# Uploads
+public/uploads/*
+!public/uploads/.gitkeep
+
 # ==========================
 # Local environment files
 # ==========================

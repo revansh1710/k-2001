@@ -4,11 +4,13 @@
   "private": true,
   "description": "A Strapi application",
   "scripts": {
+    "prebuild": "node -e \"const fs = require('fs'); fs.mkdirSync('public/uploads', { recursive: true });\"",
     "build": "strapi build",
     "console": "strapi console",
     "deploy": "strapi deploy",
     "dev": "strapi develop",
     "develop": "strapi develop",
+    "prestart": "node -e \"const fs = require('fs'); fs.mkdirSync('public/uploads', { recursive: true });\"",
     "start": "strapi start",
     "strapi": "strapi",
     "upgrade": "npx @strapi/upgrade latest",
