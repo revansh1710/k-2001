@@ -1,12 +1,16 @@
-module.exports = [
+import type { Core } from '@strapi/strapi';
+
+const config: Core.Config.Middlewares = [
+  'strapi::logger',
   'strapi::errors',
   'strapi::security',
-  'strapi::cors',                // <— make sure cors middleware is enabled
+  'strapi::cors',
   'strapi::poweredBy',
-  'strapi::logger',
   'strapi::query',
   'strapi::body',
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
 ];
+
+export default config;
